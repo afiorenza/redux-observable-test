@@ -23,10 +23,10 @@ const stock = (state = initialState, action) => {
         case FETCH_SYMBOLS_SUCCESS:
             return {
                 ...state,
-                bestMatches: action.payload.bestMatches || [],
+                bestMatches: action.payload.bestMatches,
                 fetchSymbolOngoing: false,
                 hasFetchedSymbol: true,
-                error: action.payload.Note || null
+                error: null
             };
 
         case FETCH_SYMBOLS_FAILURE:

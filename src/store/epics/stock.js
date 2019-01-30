@@ -18,7 +18,10 @@ export const searchSymbolEpic = action$ => action$.pipe(
         ajax
             .getJSON(createUrl(`function=SYMBOL_SEARCH&keywords=${action.payload.symbol}`))
             .pipe(
-                map(response => fetchSymbolsSuccess(response)),
+                map(response => response.Note
+                    ? fetchSymbolsFailure({ error: response.Note })
+                    : fetchSymbolsSuccess(response)
+                ),
                 catchError(error => fetchSymbolsFailure(error))
             )
     )
